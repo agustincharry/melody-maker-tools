@@ -1,0 +1,40 @@
+{
+  "name": "melody-maker-tools",
+  "version": "1.0.0",
+  "description": "",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "devDependencies": {
+    "prettier": "^2.8.4",
+    "tslint": "^6.1.3",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.9.5"
+  },
+  "scripts": {
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "lint": "tslint -p tsconfig.json",
+    "test": "jest",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agustincharry/melody-maker-tools.git"
+  },
+  "keywords": [
+    "music",
+    "melody",
+    "maker"
+  ],
+  "author": "agustincharry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agustincharry/melody-maker-tools/issues"
+  },
+  "homepage": "https://github.com/agustincharry/melody-maker-tools#readme",
+  "files": [
+    "lib/**/*"
+  ]
+}
