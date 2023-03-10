@@ -147,9 +147,30 @@ describe('getRandomNumberWithProbabilitiesFromArray function', () => {
     ];
 
     testData.forEach(item => {
-        test('getRandomNumberWithProbabilitiesFromArray : ' + item['array'], () => {
+        test('getRandomNumberWithProbabilitiesFromArray: ' + item['array'] + ' probabilities: ' + item['probabilities'], () => {
             const result: number = getRandomNumberWithProbabilitiesFromArray(item['array'], item['probabilities']);
             expect(item['array'].indexOf(result) >= 0).toBe(true);
+        });
+    });
+
+
+    const testData100: Array<any> = [
+        {
+            "array": [1, 2],
+            "probabilities": [100, 0],
+            "expectedResult": 1
+        },
+        {
+            "array": [15, 23],
+            "probabilities": [0, 100],
+            "expectedResult": 23
+        }
+    ];
+
+    testData100.forEach(item => {
+        test('getRandomNumberWithProbabilitiesFromArray: ' + item['array'] + ' probabilities: ' + item['probabilities'], () => {
+            const result: number = getRandomNumberWithProbabilitiesFromArray(item['array'], item['probabilities']);
+            expect(result).toBe(item['expectedResult']);
         });
     });
 });
