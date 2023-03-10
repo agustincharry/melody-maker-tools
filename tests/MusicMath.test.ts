@@ -174,3 +174,44 @@ describe('getRandomNumberWithProbabilitiesFromArray function', () => {
         });
     });
 });
+
+describe('removeAndAddPrevious function', () => {
+    const removeAndAddPrevious = MusicMath['removeAndAddPrevious'];
+
+    const testData: Array<any> = [
+        {
+            "possibleValues": [1, 2, 3, 4, 5],
+            "resultingValues": [2, 3, 5],
+            "expectedResultFunction": true
+        },
+        {
+            "possibleValues": [10, 20],
+            "resultingValues": [10],
+            "expectedResultFunction": false
+        },
+        {
+            "possibleValues": [5, 10, 15, 20],
+            "resultingValues": [10],
+            "expectedResultFunction": true
+        },
+        {
+            "possibleValues": [],
+            "resultingValues": [],
+            "expectedResultFunction": false
+        },
+        {
+            "possibleValues": [5, 10],
+            "resultingValues": [],
+            "expectedResultFunction": false
+        },
+    ];
+
+    testData.forEach(item => {
+        test('removeAndAddPrevious: possibleValues:' + item['possibleValues'] + ' expectedResultFunction: ' + item['expectedResultFunction'], () => {
+            const result: boolean = removeAndAddPrevious(item['possibleValues'], item['resultingValues']);
+            expect(result).toBe(item['expectedResultFunction']);
+        });
+    });
+
+
+});
