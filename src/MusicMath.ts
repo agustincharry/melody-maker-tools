@@ -1,16 +1,24 @@
 
 export class MusicMath {
 
+    /**
+     * Return the combination of "possibleValues" that summed got the "wantedValue"
+     * @param {number} wantedValue Wanted value of the sum.
+     * @param {Array<number>} possibleValues SORTED Possibles values to sum in the algorithm.
+     * @param {Array<number>} probabilities Probabilities of choose the values.
+     * @returns {Array<number>} Array with numbers that added together return the "wantedValue". Empty array if there is no solution.
+     */
     public static randomSum = (wantedValue: number, possibleValues: Array<number>, probabilities: Array<number>): Array<number> => {
         return this.searchRandomSum(wantedValue, possibleValues, probabilities, []);
     }
 
     /**
      * Return the combination of "possibleValues" that summed got the "wantedValue"
-     * @param {number} wantedValue Wanted value of the sum
-     * @param {Array<number>} possibleValues SORTED Possibles values to sum in the algorithm
-     * @param {Array<number>} probabilities Probabilities of choose the values
-     * @param {Array<number>} resultingValues Values that are be processing by the algorithm
+     * @param {number} wantedValue Wanted value of the sum.
+     * @param {Array<number>} possibleValues SORTED Possibles values to sum in the algorithm.
+     * @param {Array<number>} probabilities Probabilities of choose the values.
+     * @param {Array<number>} resultingValues Values that are be processing by the algorithm. Here is stored the possible solution.
+     * @returns {Array<number>} Array with numbers that added together return the "wantedValue". Empty array if there is no solution.
      */
     private static searchRandomSum = (wantedValue: number, possibleValues: Array<number>, probabilities: Array<number>, resultingValues: Array<number>): Array<number> => {
         let amount = this.sumOfarray(resultingValues);
@@ -21,7 +29,7 @@ export class MusicMath {
         else if (amount > wantedValue){
             let added = this.removeAndAddPrevious(possibleValues, resultingValues)
             if(!added){
-                return []; // To review!!!!!!!!!!!!!!!!
+                return []; // Empty array if there is no solution.
             }
         }
         else {
