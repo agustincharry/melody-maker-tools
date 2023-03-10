@@ -1,8 +1,8 @@
 
-export module MusicMath {
+export class MusicMath {
 
-    export const randomSum = (wantedValue: number, possibleValues: Array<number>, probabilities: Array<number>): Array<number> => {
-        return searchRandomSum(wantedValue, possibleValues, probabilities, []);
+    public static randomSum = (wantedValue: number, possibleValues: Array<number>, probabilities: Array<number>): Array<number> => {
+        return this.searchRandomSum(wantedValue, possibleValues, probabilities, []);
     }
 
     /**
@@ -12,23 +12,23 @@ export module MusicMath {
      * @param {Array<number>} probabilities Probabilities of choose the values
      * @param {Array<number>} resultingValues Values that are be processing by the algorithm
      */
-    const searchRandomSum = (wantedValue: number, possibleValues: Array<number>, probabilities: Array<number>, resultingValues: Array<number>): Array<number> => {
-        let amount = sumOfarray(resultingValues);
+    private static searchRandomSum = (wantedValue: number, possibleValues: Array<number>, probabilities: Array<number>, resultingValues: Array<number>): Array<number> => {
+        let amount = this.sumOfarray(resultingValues);
         
         if (amount == wantedValue){
             return resultingValues;
         }
         else if (amount > wantedValue){
-            let added = removeAndAddPrevious(possibleValues, resultingValues)
+            let added = this.removeAndAddPrevious(possibleValues, resultingValues)
             if(!added){
                 return []; // To review!!!!!!!!!!!!!!!!
             }
         }
         else {
-            let value: number = !probabilities ? getRandomNumberFromArray(possibleValues) : getRandomNumberWithProbabilitiesFromArray(possibleValues, probabilities);
+            let value: number = !probabilities ? this.getRandomNumberFromArray(possibleValues) : this.getRandomNumberWithProbabilitiesFromArray(possibleValues, probabilities);
             resultingValues.push(value);
         }
-        return searchRandomSum(wantedValue, possibleValues, probabilities, resultingValues);
+        return this.searchRandomSum(wantedValue, possibleValues, probabilities, resultingValues);
     }
 
 
@@ -38,7 +38,7 @@ export module MusicMath {
      * @param {Array<number>} resultingValues Values that are be processing by the algorithm
      * @returns {boolean} True if all "resultingValues" has a new element, False if is not possible get previous "possibleValues"
      */
-    const removeAndAddPrevious = (possibleValues: Array<number>, resultingValues: Array<number>): boolean => {
+    private static removeAndAddPrevious = (possibleValues: Array<number>, resultingValues: Array<number>): boolean => {
         let added: boolean = false;
         while(!added && resultingValues.length > 0){
             let lastValue: number | undefined = resultingValues.pop();
@@ -57,7 +57,7 @@ export module MusicMath {
      * @param {Array<number>} array Array that will be summed
      * @returns {number} Sum of the array elements
      */
-    const sumOfarray = (array: Array<number>): number => {
+    private static sumOfarray = (array: Array<number>): number => {
         return array.reduce((a, b) => a + b, 0);
     }
 
@@ -68,7 +68,7 @@ export module MusicMath {
      * @param {number} max Maximum number
      * @returns {number} Random number
      */
-    const randomIntFromInterval = (min: number, max: number): number => {
+    private static randomIntFromInterval = (min: number, max: number): number => {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
 
@@ -78,7 +78,7 @@ export module MusicMath {
      * @param {Array<number>} array Array that will be sorted
      * @returns {Array<number>} Sorted array
      */
-    const sortArray = (array: Array<number>): Array<number> => {
+    private static sortArray = (array: Array<number>): Array<number> => {
         return array.sort(function(a, b){return a-b});
     }
 
@@ -88,8 +88,8 @@ export module MusicMath {
      * @param {Array<number>} values Possible values to choose
      * @returns {number} Random element of the values array
      */
-   const getRandomNumberFromArray = (values: Array<number>): number => {
-        let i: number = randomIntFromInterval(0, values.length-1);
+   private static getRandomNumberFromArray = (values: Array<number>): number => {
+        let i: number = this.randomIntFromInterval(0, values.length-1);
         return values[i];
     }
 
@@ -100,14 +100,14 @@ export module MusicMath {
      * @param {Array<number>} probabilities Probabilities of choose the values
      * @returns {number} Random value
      */
-    const getRandomNumberWithProbabilitiesFromArray = (values: Array<number>, probabilities: Array<number>): number => {
+    private static getRandomNumberWithProbabilitiesFromArray = (values: Array<number>, probabilities: Array<number>): number => {
         let allValues: Array<number> = [];
         for(let i: number = 0; i < values.length; i++){
             for(let j: number = 0; j < probabilities[i]; j++){
                 allValues.push(values[i]);
             }   
         }
-        return getRandomNumberFromArray(allValues)
+        return this.getRandomNumberFromArray(allValues)
     }
 
 }
