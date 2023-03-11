@@ -261,7 +261,7 @@ describe('randomSum function', () => {
     ];
 
     testDataNegative.forEach(item => {
-        test('randomSum Negative: wantedValue:' + item['wantedValue'] + ' possibleValues: ' + item['possibleValues'], () => {
+        test('randomSum WithoutSolution: wantedValue:' + item['wantedValue'] + ' possibleValues: ' + item['possibleValues'], () => {
             const result: Array<number> = randomSum(item['wantedValue'], item['possibleValues'], item['probabilities']);
             expect(result.length).toBe(0);
         });
