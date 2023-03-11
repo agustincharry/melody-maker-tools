@@ -175,6 +175,7 @@ describe('getRandomNumberWithProbabilitiesFromArray function', () => {
     });
 });
 
+
 describe('removeAndAddPrevious function', () => {
     const removeAndAddPrevious = MusicMath['removeAndAddPrevious'];
 
@@ -212,6 +213,57 @@ describe('removeAndAddPrevious function', () => {
             expect(result).toBe(item['expectedResultFunction']);
         });
     });
+});
 
 
+describe('randomSum function', () => {
+    const randomSum = MusicMath['randomSum'];
+
+    const testData: Array<any> = [
+        {
+            "wantedValue": 70,
+            "possibleValues": [10, 20, 30, 50],
+            "probabilities": [20, 30, 20, 30]
+        },
+        {
+            "wantedValue": 50,
+            "possibleValues": [3, 5, 7, 10],
+            "probabilities": [50, 10, 10, 30]
+        },
+        {
+            "wantedValue": 100,
+            "possibleValues": [100, 125, 160],
+            "probabilities": [10, 70, 20]
+        },
+    ];
+
+    testData.forEach(item => {
+        test('randomSum: wantedValue:' + item['wantedValue'] + ' possibleValues: ' + item['possibleValues'], () => {
+            const result: Array<number> = randomSum(item['wantedValue'], item['possibleValues'], item['probabilities']);
+            const sum = result.reduce((a, b) => a + b, 0);
+            expect(result.length > 0).toBe(true);
+            expect(sum).toBe(item['wantedValue']);
+        });
+    });
+
+
+    const testDataNegative: Array<any> = [
+        {
+            "wantedValue": 5,
+            "possibleValues": [10, 20, 30, 50],
+            "probabilities": [20, 30, 20, 30]
+        },
+        {
+            "wantedValue": 5,
+            "possibleValues": [2, 4, 6],
+            "probabilities": [30, 30, 40]
+        },
+    ];
+
+    testDataNegative.forEach(item => {
+        test('randomSum Negative: wantedValue:' + item['wantedValue'] + ' possibleValues: ' + item['possibleValues'], () => {
+            const result: Array<number> = randomSum(item['wantedValue'], item['possibleValues'], item['probabilities']);
+            expect(result.length).toBe(0);
+        });
+    });
 });
