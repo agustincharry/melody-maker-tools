@@ -1,5 +1,5 @@
-import { NoteValue } from "../src/NoteValue";
-import { NoteValueManager } from "../src/NoteValueManager";
+import { NoteValue } from "../src/NoteValue/NoteValue";
+import { NoteValueManager } from "../src/NoteValue/NoteValueManager";
 
 let noteValueManager: NoteValueManager = new NoteValueManager();
 let testData: Array<any> = [

@@ -1,4 +1,11 @@
-import { MusicMath } from "../src/MusicMath";
+import { MusicMath } from "../src/NoteValue/MusicMath";
+import { ValueProbability } from "../src/NoteValue/ValueProbability";
+
+
+const getValueProbabilityArray = (values: Array<number>, probabilities?: Array<number>): Array<ValueProbability> => {
+    let probabilitiesFull = probabilities ? probabilities : values.map(x => 0);
+    return values.map((value, index) => new ValueProbability(value, probabilitiesFull[index]));
+}
 
 describe('sumOfarray function', () => {
     const sumOfarray = MusicMath['sumOfarray'];
@@ -90,8 +97,9 @@ describe('sortArray function', () => {
     ];
 
     testData.forEach(item => {
+        const values = getValueProbabilityArray(item['array']);
         test('sortArray: ' + item['array'], () => {
-            expect(sortArray(item['array'])).toStrictEqual(item['expectedResult']);
+            expect(sortArray(values).map(x => x.getValue())).toStrictEqual(item['expectedResult']);
         });
     });
 });
@@ -147,8 +155,9 @@ describe('getRandomNumberWithProbabilitiesFromArray function', () => {
     ];
 
     testData.forEach(item => {
+        const values = getValueProbabilityArray(item['array'], item['probabilities']);
         test('getRandomNumberWithProbabilitiesFromArray: ' + item['array'] + ' probabilities: ' + item['probabilities'], () => {
-            const result: number = getRandomNumberWithProbabilitiesFromArray(item['array'], item['probabilities']);
+            const result: number = getRandomNumberWithProbabilitiesFromArray(values);
             expect(item['array'].indexOf(result) >= 0).toBe(true);
         });
     });
@@ -168,8 +177,9 @@ describe('getRandomNumberWithProbabilitiesFromArray function', () => {
     ];
 
     testData100.forEach(item => {
+        const values = getValueProbabilityArray(item['array'], item['probabilities']);
         test('getRandomNumberWithProbabilitiesFromArray: ' + item['array'] + ' probabilities: ' + item['probabilities'], () => {
-            const result: number = getRandomNumberWithProbabilitiesFromArray(item['array'], item['probabilities']);
+            const result: number = getRandomNumberWithProbabilitiesFromArray(values);
             expect(result).toBe(item['expectedResult']);
         });
     });
@@ -208,8 +218,9 @@ describe('removeAndAddPrevious function', () => {
     ];
 
     testData.forEach(item => {
+        const values = getValueProbabilityArray(item['possibleValues']);
         test('removeAndAddPrevious: possibleValues:' + item['possibleValues'] + ' expectedResultFunction: ' + item['expectedResultFunction'], () => {
-            const result: boolean = removeAndAddPrevious(item['possibleValues'], item['resultingValues']);
+            const result: boolean = removeAndAddPrevious(values, item['resultingValues']);
             expect(result).toBe(item['expectedResultFunction']);
         });
     });

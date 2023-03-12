@@ -1,6 +1,6 @@
-import { NoteValueManager } from "./NoteValueManager";
-import { MusicMath } from './MusicMath'
-import { NoteValue } from "./NoteValue";
+import { NoteValueManager } from "./NoteValue/NoteValueManager";
+import { MusicMath } from './NoteValue/MusicMath'
+import { NoteValue } from "./NoteValue/NoteValue";
 
 export class MelodyMaker {
 
