@@ -1,7 +1,6 @@
 import { NoteValue } from "../src/NoteValue/NoteValue";
 import { NoteValueManager } from "../src/NoteValue/NoteValueManager";
 
-let noteValueManager: NoteValueManager = new NoteValueManager();
 let testData: Array<any> = [
     {
         "id": '1/64',
@@ -37,15 +36,15 @@ let testData: Array<any> = [
 describe('getNoteValueById function', () => {
     testData.forEach(item => {
         test('getNoteValueById: id: ' + item['id'], () => {
-            const result: NoteValue = noteValueManager.getNoteValueById(item['id']);
+            const result: NoteValue = NoteValueManager.getNoteValueById(item['id']);
             expect(result.getId()).toBe(item['id']);
             expect(result.getName()).toBe(item['name']);
 
-            const result2: NoteValue = noteValueManager.getNoteValueBySymbolicDuration(result.getSymbolicDuration());
+            const result2: NoteValue = NoteValueManager.getNoteValueBySymbolicDuration(result.getSymbolicDuration());
             expect(result2.getId()).toBe(item['id']);
             expect(result2.getName()).toBe(item['name']);
 
-            const result3: number = noteValueManager.getSymbolicDurationById(result.getId());
+            const result3: number = NoteValueManager.getSymbolicDurationById(result.getId());
             expect(result3).toBe(result.getSymbolicDuration());
             expect(result3 > 0).toBe(true);
         });
@@ -56,15 +55,15 @@ describe('getNoteValueById function', () => {
 describe('getNoteValueByName function', () => {
     testData.forEach(item => {
         test('getNoteValueByName: name: ' + item['name'], () => {
-            const result: NoteValue = noteValueManager.getNoteValueByName(item['name']);
+            const result: NoteValue = NoteValueManager.getNoteValueByName(item['name']);
             expect(result.getId()).toBe(item['id']);
             expect(result.getName()).toBe(item['name']);
 
-            const result2: NoteValue = noteValueManager.getNoteValueBySymbolicDuration(result.getSymbolicDuration());
+            const result2: NoteValue = NoteValueManager.getNoteValueBySymbolicDuration(result.getSymbolicDuration());
             expect(result2.getId()).toBe(item['id']);
             expect(result2.getName()).toBe(item['name']);
 
-            const result3: number = noteValueManager.getSymbolicDurationById(result.getId());
+            const result3: number = NoteValueManager.getSymbolicDurationById(result.getId());
             expect(result3).toBe(result.getSymbolicDuration());
             expect(result3 > 0).toBe(true);
         });
@@ -74,10 +73,10 @@ describe('getNoteValueByName function', () => {
 
 describe('getSymbolicDurationByIdArray function', () => {
     const ids: Array<string> = testData.map(x => x['id']);
-    const durations: Array<number> = noteValueManager.getSymbolicDurationByIdArray(ids);
+    const durations: Array<number> = NoteValueManager.getSymbolicDurationByIdArray(ids);
 
     ids.forEach((id, index) => {
-        const result: NoteValue = noteValueManager.getNoteValueById(id);
+        const result: NoteValue = NoteValueManager.getNoteValueById(id);
         expect(result.getId()).toBe(id);
         expect(result.getSymbolicDuration()).toBe(durations[index]);
     });
